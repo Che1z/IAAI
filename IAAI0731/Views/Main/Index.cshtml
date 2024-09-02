@@ -1,0 +1,31 @@
+﻿@model IAAI0731.Models.ViewModel.IndexNews
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="row">
+    @foreach (var ele in Model.NewsItems)
+    {
+
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="latest-post">
+                <img class="img-responsive" src="@Model.NewsPhotos.Where(x => x.NewsId == ele.Id).FirstOrDefault().FilePath" alt="img">
+                <div class="post-body">
+                    <h4 class="post-title">
+                        <a href="/Press/Detail?id=@ele.Id">@ele.Title</a>
+                    </h4>
+                    <span class="post-item-date">
+                        <i class="fa fa-clock-o"></i> @ele.CreateAt.ToString("yyyy/MM/dd")
+                    </span>
+                    <div class="post-text">
+                        <p>@ele.Description</p>
+                    </div>
+                </div>
+                <a href="/Press/Detail?id=@ele.Id" class="btn btn-primary">More</a>
+            </div><!-- Latest post end -->
+        </div><!-- 1st post col end -->
+    }
+</div>

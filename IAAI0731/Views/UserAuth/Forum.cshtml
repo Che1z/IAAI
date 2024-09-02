@@ -1,0 +1,60 @@
+﻿@model MvcPaging.IPagedList<IAAI0731.Models.Forum>
+@{
+    ViewBag.Title = "Forum";
+}
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+    <h2 class="page-title">討論區</h2>
+    <hr class="botmargin-min">
+    <!-- 內容開始 -->
+
+    <a class="btn btn-primary" href="/UserAuth/Post">張貼文章</a>
+
+
+    <table class="table table-striped career-table download-table" style="margin-top: 20px">
+
+        <thead>
+            <tr>
+
+                <th><span class="text-left">標題</span></th>
+                <th>發表人</th>
+                <th>最新回覆人</th>
+                <th>回覆數</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><span class="text-left"><a href="/UserAuth/Detail/@item.Id">@item.Title</a></span></td>
+                    <td>@item.UpdatedBy <br>@item.CreateAt.ToString("yyyy/MM/dd")</td>
+                    <td>
+                        <!--
+                            ?. 運算符確保如果 FirstOrDefault() 返回 null，不會訪問 UpdatedBy
+                            ?? "" 確保如果整個表達式為 null，將返回空字符串。
+                        -->
+                        @(item.ForumReplies.OrderByDescending(a => a.CreateAt).FirstOrDefault()?.UpdatedBy ?? "")
+                        <br>
+                        @(item.ForumReplies.OrderByDescending(a => a.CreateAt).FirstOrDefault()?.CreateAt.ToString("yyyy/MM/dd") ?? "")
+                    </td>
+                    <td>
+                        @(item.ForumReplies?.Count() ?? 0)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!--分頁開始-->
+    <div class="pager">
+        <div class="pages">
+            <div class="pagination">
+                @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+            </div>
+        </div>
+    </div>
+    <!--分頁結束-->
+
+</div>
+

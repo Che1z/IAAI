@@ -1,0 +1,32 @@
+﻿@model IAAI0731.Models.BackModel.News
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/AboutUsIntro/_AboutUsLayout.cshtml";
+
+}
+
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+    <h2 class="page-title">訊息發布</h2>
+    <hr class="botmargin-min">
+    <!-- 內容開始 -->
+    <div class="post-content">
+
+        <div class="post-body">
+            <div class="entry-header">
+                <span class="post-meta-date"><i class="fa fa fa-clock-o"></i> @Model.CreateAt.ToString("dd/MM/yyyy")</span>
+                <h2 class="entry-title">
+                    @Model.Title
+                </h2>
+            </div><!-- header end -->
+            @Html.Raw(Model.Content)
+        </div>
+
+    </div>
+    <div class="post-footer">
+        <a href="/Press/news" class="btn btn-primary">回到列表</a>
+    </div>
+</div>
+

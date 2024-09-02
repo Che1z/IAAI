@@ -1,0 +1,115 @@
+﻿@model IAAI0731.Models.BackModel.Membership
+@{
+    ViewBag.Title = "PermissionDetail";
+    Layout = "~/Areas/Backend/Views/MainPanel/_MainPanel.cshtml";
+}
+
+<style>
+    .pager .pages .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+</style>
+
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+    <h2 class="page-title">會員權限</h2>
+    <hr class="botmargin-min">
+    <div class="col-sm-8">
+        @using (Html.BeginForm($"PermissionDetail", "MemberShip", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.NewPermission)
+            @Html.Hidden("newsId", Model.Id)
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="">
+                        <h4>
+                            使用者編號:
+                            @Html.DisplayFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+                        </h4>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="">
+                        <h4>
+                            帳號:
+                            @Html.DisplayFor(model => model.Account, new { htmlAttributes = new { @class = "form-control" } })
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-7">
+                        <h4>
+                            名稱:
+                            @Html.DisplayFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h4>權限:</h4>
+                    <div class="col-md-10 permission">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="修正" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+</div>
+
+@section scripts{
+    <script>
+        // prettier-ignore
+        //let data = [{ "id": "0", "text": "node-0", "children": [{ "id": "0-0", "text": "node-0-0", "children": [{ "id": "0-0-0", "text": "node-0-0-0" }, { "id": "0-0-1", "text": "node-0-0-1" }, { "id": "0-0-2", "text": "node-0-0-2" }] }, { "id": "0-1", "text": "node-0-1", "children": [{ "id": "0-1-0", "text": "node-0-1-0" }, { "id": "0-1-1", "text": "node-0-1-1" }, { "id": "0-1-2", "text": "node-0-1-2" }] }, { "id": "0-2", "text": "node-0-2", "children": [{ "id": "0-2-0", "text": "node-0-2-0" }, { "id": "0-2-1", "text": "node-0-2-1" }, { "id": "0-2-2", "text": "node-0-2-2" }] }] }, { "id": "1", "text": "node-1", "children": [{ "id": "1-0", "text": "node-1-0", "children": [{ "id": "1-0-0", "text": "node-1-0-0" }, { "id": "1-0-1", "text": "node-1-0-1" }, { "id": "1-0-2", "text": "node-1-0-2" }] }, { "id": "1-1", "text": "node-1-1", "children": [{ "id": "1-1-0", "text": "node-1-1-0" }, { "id": "1-1-1", "text": "node-1-1-1" }, { "id": "1-1-2", "text": "node-1-1-2" }] }, { "id": "1-2", "text": "node-1-2", "children": [{ "id": "1-2-0", "text": "node-1-2-0" }, { "id": "1-2-1", "text": "node-1-2-1" }, { "id": "1-2-2", "text": "node-1-2-2" }] }] }, { "id": "2", "text": "node-2", "children": [{ "id": "2-0", "text": "node-2-0", "children": [{ "id": "2-0-0", "text": "node-2-0-0" }, { "id": "2-0-1", "text": "node-2-0-1" }, { "id": "2-0-2", "text": "node-2-0-2" }] }, { "id": "2-1", "text": "node-2-1", "children": [{ "id": "2-1-0", "text": "node-2-1-0" }, { "id": "2-1-1", "text": "node-2-1-1" }, { "id": "2-1-2", "text": "node-2-1-2" }] }, { "id": "2-2", "text": "node-2-2", "children": [{ "id": "2-2-0", "text": "node-2-2-0" }, { "id": "2-2-1", "text": "node-2-2-1" }, { "id": "2-2-2", "text": "node-2-2-2" }] }] }]
+        let data = @Html.Raw(ViewBag.PermissionData);
+
+
+        // 創建一個 Tree 物件，並初始化它的選項
+        let tree = new Tree('.permission', {
+            // 設定树形結構的數據，這可能包含了有關權限的相關數據
+            data: data,
+
+            // 設定树形結構的默認展開深度為 3 層
+            closeDepth: 3,
+
+            // 當樹形結構加載完成後執行的回調函數
+            loaded: function () {
+                // 設置一些初始選中的節點
+                @*this.values = @ViewBag.DefaultPermission.Split(',');*@
+                let defaultPermissionString = '@ViewBag.DefaultPermission';
+                this.values = defaultPermissionString.split(',').map(item => item.trim());
+
+                // 打印已選中的節點到控制台
+                console.log(this.selectedNodes);
+
+                // 打印 this.values 的值到控制台
+                console.log(this.values);
+
+                // 設置一些禁用的節點
+                this.disables = ['B01']
+            },
+
+            // 當樹形結構的選中狀態發生改變時執行的回調函數
+            onChange: function () {
+                // 打印 this.values 的值到控制台
+                console.log(this.values);
+                //將 this.values 的值設定為 #Permission 元素的值
+                $('#NewPermission').val(this.values)
+            }
+
+
+        })
+    </script>
+}

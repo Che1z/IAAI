@@ -1,0 +1,80 @@
+﻿@model IAAI0731.Models.BackModel.ViewModel.NewsVM
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Backend/Views/MainPanel/_MainPanel.cshtml";
+
+}
+
+
+
+<style>
+    .page-title {
+        text-align: left;
+    }
+</style>
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+    <h2 class="page-title">新聞新增頁</h2>
+
+    @using (Html.BeginForm("Create", "News", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline" }))
+    {
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                <div class="col-md-7">
+                    <h4>請輸入新聞標題:</h4>
+                    @Html.EditorFor(model => model.news.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入標題" } })
+                    @Html.ValidationMessageFor(model => model.news.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-7">
+                    <h4>請輸入新聞敘述:</h4>
+                    @Html.EditorFor(model => model.news.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入敘述" } })
+                    @Html.ValidationMessageFor(model => model.news.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-7">
+                    <h4>請輸入內文:</h4>
+                    @Html.TextAreaFor(model => model.news.Content, new { @class = "form-control ckeditor", name = "ckeditor" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class=" col-md-7">
+                    <h4>請上傳封面照片:</h4>
+                    <input class="form-control mb-3" type="file" name="file" />
+                    <p class="text-danger"> 註 : 檔案大小不可大於4MB </p>
+                    @Html.ValidationMessage("Invalid Input", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="新增" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+<script>
+    var editor = CKEDITOR.replace('ckeditor');
+    CKFinder.setupCKEditor(editor);
+</script>
+
+
+

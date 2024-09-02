@@ -1,0 +1,37 @@
+﻿@model IEnumerable<IAAI0731.Models.BackModel.Expert>
+
+@{
+    ViewBag.Title = "Master";
+}
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+    <h2 class="page-title">專家介紹</h2>
+    <hr class="botmargin-min">
+
+    <!-- 內容開始 -->
+
+    <div class="row">
+        @foreach (var ele in Model)
+        {
+            <div class="col-md-4">
+                <div class="ts-service-wrapper">
+                    <div class="ts-service-image-wrapper">
+                        <span class="ts-service-image">
+                            <a href="~/AboutUsIntro/Detail?Id=@ele.Id" title="@ele.Name"><img class="img-responsive" src="@ele.ImagePath" alt="@ele.Name"></a>
+                        </span>
+                    </div>
+                    <div class="ts-service-info">
+                        <h3><a href="~/AboutUsIntro/Detail?Id=@ele.Id">@ele.Name</a></h3>
+                        <p>現職：@ele.CurrentJobDescription </p>
+                    </div>
+                </div>
+            </div><!-- Col 1 end -->
+
+        }
+
+    </div>
+</div>
+
+
+

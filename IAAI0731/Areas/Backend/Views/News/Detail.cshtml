@@ -1,0 +1,98 @@
+﻿@model IAAI0731.Models.BackModel.ViewModel.NewsVM
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Backend/Views/MainPanel/_MainPanel.cshtml";
+}
+
+@using Newtonsoft.Json.Linq;
+
+@{
+
+    //取得使用者資料
+    string ticketUserData = ((FormsIdentity)(HttpContext.Current.User.Identity)).Ticket.UserData;
+    JObject userData = JObject.Parse(ticketUserData);
+    string userName = (string)userData["Name"];
+    string email = (string)userData["Email"];
+    string id = (string)userData["Id"];
+
+    //取得使用者識別
+    string ticketUserID = ((FormsIdentity)(HttpContext.Current.User.Identity)).Ticket.Name;
+}
+
+<style>
+    .page-title {
+        text-align: left;
+    }
+</style>
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+    <h2 class="page-title">新聞內文頁</h2>
+
+
+    @using (Html.BeginForm("Detail", "News", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline" }))
+    {
+        <input type="hidden" name="UserName" value="@userName" />
+        <input type="hidden" name="Email" value="@email" />
+        <input type="hidden" name="Id" value="@id" />
+        <input type="hidden" name="newsId" value="@ViewBag.newsId" />
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                <div class="col-md-7">
+                    <h4>編輯新聞標題:</h4>
+                    @Html.EditorFor(model => model.news.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入標題" } })
+                    @Html.ValidationMessageFor(model => model.news.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-7">
+                    <h4>編輯新聞敘述:</h4>
+                    @Html.EditorFor(model => model.news.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入敘述" } })
+                    @Html.ValidationMessageFor(model => model.news.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-7">
+                    <h4>編輯內文:</h4>
+                    @Html.TextAreaFor(model => model.news.Content, new { @class = "form-control ckeditor", name = "ckeditor" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class=" col-md-7">
+                    <h4>變更封面照:</h4>
+                    <input class="form-control mb-3" type="file" name="file" />
+                    <p class="text-danger"> 註 : 檔案大小不可大於4MB </p>
+                    @Html.ValidationMessage("Invalid Input", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="更新" class="btn btn-primary" />
+                </div>
+                <div>
+                    <br />
+                </div>
+                <div>
+                    @Html.ActionLink("回至列表", "List", "News")
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<script>
+    var editor = CKEDITOR.replace('ckeditor');
+    CKFinder.setupCKEditor(editor);
+</script>

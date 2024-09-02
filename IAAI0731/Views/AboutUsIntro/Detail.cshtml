@@ -1,0 +1,35 @@
+﻿@model IAAI0731.Models.BackModel.Expert
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2 class="page-title">專家介紹</h2>
+<hr class="botmargin-min">
+
+<div class="ts-service-wrapper">
+    <div class="col-md-4 col-sm-12 col-xs-12">
+        <div class="ts-service-image-wrapper">
+            <span class="ts-service-image">
+                <img class="img-responsive" src="@Model.ImagePath" alt="@Model.Name">
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="ts-service-info">
+            <p></p><h3>@Model.Name</h3><p></p>
+            <p><span>現職：</span>@Model.CurrentJobDescription </p>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="ts-service-info">
+            @Html.Raw(Model.AdditionalInfo)
+        </div>
+    </div>
+</div>
+<hr />
+<div>
+    @Html.ActionLink("回到列表", "Master", "AboutUsIntro")
+</div>

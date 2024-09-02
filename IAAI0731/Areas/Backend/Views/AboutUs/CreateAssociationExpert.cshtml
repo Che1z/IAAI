@@ -1,0 +1,72 @@
+﻿@model IAAI0731.Models.BackModel.Expert
+
+@{
+    ViewBag.Title = "CreateAssociationMember";
+    Layout = "~/Areas/Backend/Views/MainPanel/_MainPanel.cshtml";
+}
+
+
+
+<style>
+    .page-title {
+        text-align: left;
+    }
+</style>
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+    <h2 class="page-title">新增專家列表</h2>
+
+    @using (Html.BeginForm("CreateAssociationExpert", "AboutUs", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-7">
+                    <p>上傳照片</p>
+                    <input class="form-control mb-3" type="file" name="file" />
+                    <p class="text-danger"> 註 : 檔案大小不可大於4MB </p>
+                    @Html.ValidationMessage("Invalid Input", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrentJobDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-7">
+                    @Html.EditorFor(model => model.CurrentJobDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CurrentJobDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-7">
+                    <p>補充資料</p>
+                    @Html.TextAreaFor(model => model.AdditionalInfo, new { @class = "form-control ckeditor", name = "ckeditor" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="新增" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+    var editor = CKEDITOR.replace('ckeditor');
+</script>
+

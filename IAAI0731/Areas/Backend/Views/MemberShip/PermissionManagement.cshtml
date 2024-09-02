@@ -1,0 +1,61 @@
+﻿@model MvcPaging.IPagedList<IAAI0731.Models.BackModel.Membership>
+@using MvcPaging
+
+
+
+@{
+    ViewBag.Title = "PermissonManagement";
+    Layout = "~/Areas/Backend/Views/MainPanel/_MainPanel.cshtml";
+}
+<style>
+    .pager .pages .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px; 
+    }
+</style>
+
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+    <h2 class="page-title">會員列表</h2>
+    <hr class="botmargin-min">
+    <!-- 內容開始 -->
+    <table class="table table-striped career-table">
+
+        <thead>
+            <tr>
+                <th>帳號</th>
+                <th><span class="text-left">信箱</span></th>
+                <th><span class="text-left">名字</span></th>
+                <th><span class="text-left">註冊時間</span></th>
+                <th>權限編輯</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ele in Model)
+            {
+                <tr>
+                    <td><span class="text-left">@ele.Account</span></td>
+                    <td><span class="text-left">@ele.Email</span></td>
+                    <td><span class="text-left">@ele.Name</span></td>
+                    <td>@ele.CreateAt.ToString("yyyy-MM-dd")</td>
+                    <td><a href="/Backend/MemberShip/PermissionDetail?id=@ele.Id" class="btn btn-primary"><i class="fa fa-download"></i> 權限</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!--分頁開始-->
+    <div class="pager">
+        <div class="pages">
+            <div class="pagination">
+                @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+            </div>
+        </div>
+    </div>
+    <!--分頁結束-->
+</div>
+
+
+
+

@@ -1,0 +1,73 @@
+﻿@model IAAI0731.Models.BackModel.Membership
+
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Areas/Backend/Views/MemberShip/_SignupLayout.cshtml";
+}
+
+@{if (!string.IsNullOrEmpty(ViewBag.Require))
+    {
+        <div class="text-danger text-center">
+            <h4 style="color:darkred">
+                @ViewBag.Require
+            </h4>
+        </div> }
+}
+
+<div class="text-center">
+    <img src="~/Asset/Images/IAAILogo3.jpg" alt="img" width="110" height="110">
+</div>
+<div class="text-center">
+
+    <h4 class="text-center f-w-500 mt-4 mb-3">會員註冊</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group mb-3">
+                <div>
+                    @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入帳號" } })
+                    @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "請輸入密碼" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入姓名" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "請輸入信箱" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2">
+                    <input type="submit" value="註冊" class="btn btn-primary shadow px-sm-4" />
+                </div>
+            </div>
+
+
+        </div>
+    }
+    <div class="d-flex justify-content-center ">
+        <p class="mb-0 text-muted ">已經有帳戶? </p> <a href="~/Backend/MemberShip/LogIn">登入</a>
+    </div>
+</div>
+
+

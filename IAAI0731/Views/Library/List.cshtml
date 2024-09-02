@@ -1,0 +1,44 @@
+﻿@model MvcPaging.IPagedList<IAAI0731.Models.BackModel.Knowledge>
+@{
+    ViewBag.Title = "Download";
+    Layout = "~/Views/AboutUsIntro/_AboutUsLayout.cshtml";
+}
+
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+    <h2 class="page-title">知識庫下載</h2>
+    <hr class="botmargin-min">
+    <!-- 內容開始 -->
+    <table class="table table-striped career-table download-table">
+
+        <thead>
+            <tr>
+                <th>日期</th>
+                <th><span class="text-left">標題</span></th>
+                <th><span class="text-left">上傳者</span></th>
+                <th>檔案</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ele in Model)
+            {
+                <tr>
+                    <td>@ele.CreateAt.ToString("yyyy-MM-dd")</td>
+                    <td><span class="text-left">@ele.Title</span></td>
+                    <td><span class="text-left">@ele.MembershipsFK.Name</span></td>
+                    <td><a href="/Library/Download?id=@ele.Id" class="btn btn-primary"><i class="fa fa-download"></i> 下載</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!--分頁開始-->
+    <div class="pager">
+        <div class="pages">
+            <div class="pagination">
+                @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalItemCount)
+            </div>
+        </div>
+    </div>
+    <!--分頁結束-->
+</div>

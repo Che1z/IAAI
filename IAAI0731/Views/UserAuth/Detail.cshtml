@@ -1,0 +1,140 @@
+﻿@model IAAI0731.Models.ViewModel.ForumDetailVM
+
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+    <h2 class="page-title">討論區</h2>
+    <hr class="botmargin-min">
+    <!-- 內容開始 -->
+    <style>
+        .entry-header {
+            background: #3c73b0;
+            color: white;
+            padding: 10px 30px;
+        }
+
+            .entry-header .entry-title {
+                color: white;
+            }
+
+        .entry-title {
+        }
+
+        .post-meta-date {
+        }
+
+        .post-content {
+            border: whitesmoke 1px solid;
+            margin-bottom: 20px;
+            box-shadow: rgba(210,210,210,.1) 2px 2px 20px;
+        }
+
+        .entry-content {
+        }
+
+        .post {
+            border: whitesmoke 1px solid;
+            padding: 0;
+        }
+
+        .postInfo {
+            padding: 10px 20px;
+            background: #eee;
+            text-align: right;
+        }
+
+        .respon {
+            margin: 20px auto;
+            display: inline-block;
+            padding: 3px 8px;
+            background: #b2b2b2;
+            color: white;
+            border-radius: 2px;
+        }
+
+        .post-body {
+            background: #FCFCFC;
+            padding: 30px;
+            box-shadow: rgba(210,210,210,.1) 2px 2px 20px;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .postMan {
+            font-size: 16px;
+        }
+    </style>
+    <input type="hidden" name="id" value="@Model.Forum.Id">
+
+    <div class="post-content">
+        <div class="entry-header">
+            <h2 class="entry-title">
+                @Model.Forum.Title
+            </h2>
+            <span class="postMan"> 發表人:@Model.Forum.UpdatedBy</span>
+
+        </div><!-- header end -->
+        <div class="postInfo">
+            <span class="post-meta-date"><i class="fa fa fa-clock-o"></i> @Model.Forum.CreateAt.ToString("yyyy/MM/dd")</span>
+
+
+        </div>
+        <div class="post-body">
+            <div class="entry-content topmargin-min">
+                @Html.Raw(Model.Forum.Content)
+
+            </div>
+            <div class="tags-area clearfix">
+
+
+
+            </div>
+
+        </div>
+
+
+
+    </div><!-- post-body end -->
+
+    <a class="respon" href="/UserAuth/Reply?id=@Model.Forum.Id">回應文章</a>
+    <div class="clear"></div>
+
+    @foreach (var reply in Model.ForumReplies)
+    {
+    <div class="post">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="entry-header">
+                    <div class="post-media post-image postMan">
+                        回應:@reply.UpdatedBy
+                    </div>
+                </div>
+                <div class="postInfo">
+                    <span class="post-meta-date"><i class="fa fa fa-clock-o"></i>@reply.CreateAt.ToString("yyyy/MM/dd")</span>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="post-body">
+                    @Html.Raw(reply.ReplyContent)
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!--分頁開始-->
+    <div class="pager">
+        <div class="pages">
+            <div class="pagination">
+                @Html.Pager(Model.ForumReplies.PageSize, Model.ForumReplies.PageNumber, Model.ForumReplies.TotalItemCount).Options(x => x.AddRouteValue("id", Model.Forum.Id))
+            </div>
+        </div>
+    </div>
+    <!--分頁結束-->
+</div>
