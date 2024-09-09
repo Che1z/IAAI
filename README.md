@@ -2,7 +2,7 @@
     <img alt=".net framework" src="https://img.shields.io/badge/.netframework-yellow?style=for-the-badge">
     <img alt="MVC5" src="https://img.shields.io/badge/MVC5-007ACC?style=for-the-badge&logoColor=white" > 
     <h1>消防協會組織網站 | .Net Framework MVC 5<h1/>
-    ![image](https://github.com/Che1z/IAAI/blob/master/IAAI_View.png?raw=true)
+    ![image](https://github.com/Che1z/IAAI/blob/master/IAAI_View.png)
 </div>
      
 此網站為個人全端實作 MVC 5 網站，包含網站前台、管理者後台等兩區域
