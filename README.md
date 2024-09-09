@@ -1,35 +1,46 @@
-<div align="center">
-    <img alt=".net framework" src="https://img.shields.io/badge/.netframework-yellow?style=for-the-badge">
-    <img alt="MVC5" src="https://img.shields.io/badge/MVC5-007ACC?style=for-the-badge&logoColor=white" > 
-    <h1>消防協會組織網站 | .Net Framework MVC 5<h1/>
-    ![image](https://github.com/Che1z/IAAI/blob/master/IAAI_View.png)
-</div>
+
+<h1 align="center" style="font-weight: 700"><img alt="MVC5" src="https://img.shields.io/badge/.Net_Framework-MVC_5-Green"> 消防協會組織網站  | .Net Framework MVC 5 </h1>
+<div align="center" style="margin-bottom:24px">
+
+ <p align="center">
+    <img width="1200" src ="https://github.com/Che1z/IAAI/blob/master/IAAI_View.png">
+</p>
+ 
+
      
 此網站為個人全端實作 MVC 5 網站，包含網站前台、管理者後台等兩區域
 前台使用者除可以進行網站瀏覽，亦可進行登入、註冊及發文、留言
 後臺管理者可以使用 CK Editor 進行訊息撰寫、亦可針對特定頁面資料進行 CRUD 存取
+</div>
 
-功能介紹
-身份分為「網站瀏覽者」、「前台會員」及「後台管理者」角色
+<h2 align="center" >功能介紹</h2>
 
-► 網站瀏覽者
-瀏覽網站頁面
+> 身份分為「網站瀏覽者」、「前台會員」及「後台管理者」角色
 
-前台會員註冊與登入
+### ► 網站瀏覽者
 
-信件通知網站管理者
+- 瀏覽網站頁面
+  
+- 前台會員註冊與登入
+  
+- 信件通知網站管理者
 
-► 前台會員
-具備「網站瀏覽者」之角色功能
 
-啟用留言板功能，具備建立貼文、回覆文章功能
+### ► 前台會員
 
-► 後台管理者
-編輯特定頁面之資訊
+- 具備「網站瀏覽者」之角色功能
+  
+- 啟用留言板功能，具備建立貼文、回覆文章功能
 
-CRUD特定頁面之資料
 
-管理會員後台頁面存取權限
+### ► 後台管理者 
+
+- 編輯特定頁面之資訊
+
+- CRUD特定頁面之資料
+
+- 管理會員後台頁面存取權限
+
 
 個人產出
 後端開發環境：
