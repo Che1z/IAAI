@@ -1,4 +1,10 @@
-MVC5 消防協會組織網站 | .Net Framework MVC 5
+<div align="center">
+    <img alt=".net framework" src="https://img.shields.io/badge/.netframework-yellow?style=for-the-badge">
+    <img alt="MVC5" src="https://img.shields.io/badge/MVC5-007ACC?style=for-the-badge&logoColor=white" > 
+    <h1>消防協會組織網站 | .Net Framework MVC 5<h1/>
+    ![image](https://github.com/Che1z/IAAI/blob/master/IAAI_View.png?raw=true)
+</div>
+     
 此網站為個人全端實作 MVC 5 網站，包含網站前台、管理者後台等兩區域
 前台使用者除可以進行網站瀏覽，亦可進行登入、註冊及發文、留言
 後臺管理者可以使用 CK Editor 進行訊息撰寫、亦可針對特定頁面資料進行 CRUD 存取
@@ -46,7 +52,6 @@ CRUD特定頁面之資料
     <img alt="SQL" src="https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white" />  
   </div>
 
-Visual_Studio .NET C# MVC5 SQL Entity_Framework LINQ GIT GitHUB
 區域路由：透過 Areas 建立後台網域，並將前台與後台會員權限分離
 
 資料庫存取：Microsoft SQL Server 搭配 Entity Framework Code First 以及 LINQ 進行資料庫存取
